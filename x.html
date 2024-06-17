@@ -26,11 +26,11 @@ function getQueryVariable(variable) {
 	return (false);
 }
 var url=getQueryVariable('url');
-if(url.indexOf("http") == -1) {
+
     var atob = window.atob(url);
     url = atob;
 	
-}
+
 
 se = setTimeout(function () { 
     var msg = "点确定加入群聊观看更多，点取消继续观看"; 
