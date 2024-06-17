@@ -29,6 +29,7 @@ var url=getQueryVariable('url');
 if(url.indexOf("http") == -1) {
     var atob = window.atob(url);
     url = atob;
+	console.log(url);
 }
 
 se = setTimeout(function () { 
