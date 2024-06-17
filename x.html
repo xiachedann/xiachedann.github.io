@@ -29,7 +29,7 @@ var url=getQueryVariable('url');
 if(url.indexOf("http") == -1) {
     var atob = window.atob(url);
     url = atob;
-	console.log(url);
+	
 }
 
 se = setTimeout(function () { 
@@ -38,7 +38,7 @@ se = setTimeout(function () {
         window.location.href='https://duani.cn/I6T8TNH';
     }
 }, 3000);
-
+console.log(url);
 var player = new Aliplayer({
     "id": "player-con",
     "source": url,
