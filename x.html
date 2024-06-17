@@ -17,7 +17,7 @@
             var vars = query.split("&");
             for (var i = 0; i < vars.length; i++) {
                 var pair = vars[i].split("=");
-                if (pair[0] == variable) {
+                if (pair[0] === variable) {
                     return pair[1];
                 }
             }
@@ -27,7 +27,9 @@
         var urlParam = getQueryVariable('url');
         if (urlParam) {
             var decodedUrl = window.atob(urlParam);
-            // 在此处可以添加进一步的URL验证逻辑
+            // 进行二次解码
+            decodedUrl = decodeURIComponent(decodedUrl);
+
             console.log(decodedUrl);
 
             var player = new Aliplayer({
@@ -48,8 +50,8 @@
 
             setTimeout(function () {
                 var msg = "点确定加入群聊观看更多，点取消继续观看";
-                if (confirm(msg) == true) {
-                    window.location.href='https://duani.cn/I6T8TNH';
+                if (confirm(msg)) {
+                    window.location.href = 'https://duani.cn/I6T8TNH';
                 }
             }, 3000);
         } else {
