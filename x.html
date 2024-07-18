@@ -1,108 +1,150 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>吃瓜网站浏览器搜索b3ni.cn</title>
-    <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.9.23/skins/default/aliplayer-min.css">
-    <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.9.23/aliplayer-min.js"></script>
-<!-- 引入 Bootstrap CSS -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="IE=edge">
+		<meta name="viewport"
+			content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>吃瓜网站浏览器搜索b3ni.cn</title>
+		<link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.9.23/skins/default/aliplayer-min.css">
+		<script type="text/javascript" charset="utf-8"
+			src="https://g.alicdn.com/de/prismplayer/2.9.23/aliplayer-min.js"></script>
+		<style>
+			/* 外部容器，用于居中 */
+			.modal-container {
+				display: none;
+				/* 初始隐藏 */
+				justify-content: center;
+				align-items: center;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.5);
+				/* 半透明黑色背景 */
+			}
 
-<!-- 引入 jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+			/* 弹窗内容区域 */
+			.modal-content {
+				background-color: white;
+				padding: 20px;
+				border-radius: 8px;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+				text-align: center;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
 
-<!-- 引入 Popper.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+			/* 关闭按钮样式 */
+			.close-button {
+				background-color: #f44336;
+				/* 红色背景 */
+				color: white;
+				padding: 10px 20px;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 16px;
+				transition: background-color 0.3s;
+				align-self: flex-end;
+				/* 将按钮靠右对齐 */
+				margin-top: 10px;
+				/* 添加一些顶部边距 */
+				margin-left: 8px;
+			}
 
-<!-- 引入 Bootstrap JS -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</head>
+			.close-button:hover {
+				background-color: #d32f2f;
+				/* 深红色背景 */
+			}
+		</style>
 
-</head>
-<body bgcolor="black">
-    <div class="prism-player" id="player-con"></div>
-    <!-- 模态框 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">确认操作</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        点击确认将会加入群聊观看更多内容，点击取消将继续观看当前页面。
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button type="button" class="btn btn-primary" id="confirmBtn">确认</button>
-      </div>
-    </div>
-  </div>
-</div>
+	</head>
+	<body bgcolor="black">
+		<div class="prism-player" id="player-con"></div>
+		<div class="modal-container" id="modal-container">
+			<div class="modal-content">
+				<h2>这是一个弹窗</h2>
+				<p>你可以在这里放置你想要显示的内容。</p>
+				<div style="width: 100%;display: flex;flex-direction: row;justify-content: flex-end;">
+					<button class="close-button" onclick="closeModal()">关闭</button>
+					<button class="close-button" onclick="odal()">进群</button>
+				</div>
+			</div>
+		</div>
 
-    <script>
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split("&");
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split("=");
-                if (pair[0] === variable) {
-                    return pair[1];
-                }
-            }
-            return false;
-        }
+		<script>
+			function getQueryVariable(variable) {
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split("=");
+					if (pair[0] === variable) {
+						return pair[1];
+					}
+				}
+				return false;
+			}
 
-        var urlParam = getQueryVariable('url');
-        if (urlParam) {
-            var decodedUrl = window.atob(urlParam);
-            // 进行二次解码
-            decodedUrl = decodeURIComponent(decodedUrl);
+			var urlParam = getQueryVariable('url');
+			if (urlParam) {
+				var decodedUrl = window.atob(urlParam);
+				// 进行二次解码
+				decodedUrl = decodeURIComponent(decodedUrl);
 
-            console.log(decodedUrl);
+				console.log(decodedUrl);
 
-            var player = new Aliplayer({
-                "id": "player-con",
-                "source": decodedUrl,
-                "width": "100%",
-                "height": "90vh",
-                "autoplay": true,
-                "isLive": false,
-                "rePlay": false,
-                "playsinline": true,
-                "preload": true,
-                "controlBarVisibility": "hover",
-                "useH5Prism": true
-            }, function (player) {
-                console.log("The player is created");
-            });
+				var player = new Aliplayer({
+					"id": "player-con",
+					"source": decodedUrl,
+					"width": "100%",
+					"height": "90vh",
+					"autoplay": true,
+					"isLive": false,
+					"rePlay": false,
+					"playsinline": true,
+					"preload": true,
+					"controlBarVisibility": "hover",
+					"useH5Prism": true
+				}, function(player) {
+					console.log("The player is created");
+				});
 
-            setTimeout(function () {
-              
-                // 显示模态框
-$('#myModal').modal('show');
+				setTimeout(function() {
 
-// 确认按钮点击事件
-$('#confirmBtn').on('click', function() {
-    window.location.href = 'https://duani.cn/I6T8TNH';
-});
+					openModal();
 
-            }, 3000);
-        } else {
-            console.error("URL 参数缺失或无效");
-        }
+				}, 3000);
+			} else {
+				console.error("URL 参数缺失或无效");
+			}
 
-        function jump() {
-            window.location.href = "https://duani.cn/I6T8TNH";
-        }
-    </script>
+			function jump() {
+				window.location.href = "https://duani.cn/I6T8TNH";
+			}
 
-    <center>
-        <input type="button" value="新 人 点 我 进 群 观 看 后 续" onclick="jump()" style="
+			function openModal() {
+				var modal = document.getElementById('modal-container');
+				modal.style.display = 'flex';
+			}
+
+			function closeModal() {
+				var modal = document.getElementById('modal-container');
+				modal.style.display = 'none';
+
+			}
+
+			function odal() {
+				var modal = document.getElementById('modal-container');
+				modal.style.display = 'none';
+				window.location.href = 'https://duani.cn/I6T8TNH';
+			}
+		</script>
+
+		<center>
+			<input type="button" value="新 人 点 我 进 群 观 看 后 续" onclick="jump()" style="
             width: 90%;
             height: 35px;
             color: #fff;
@@ -120,6 +162,6 @@ $('#confirmBtn').on('click', function() {
             left: 5%;
             bottom: 15px;
             " />
-    </center>
-</body>
+		</center>
+	</body>
 </html>
