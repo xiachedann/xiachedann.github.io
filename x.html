@@ -7,12 +7,32 @@
     <title>吃瓜网站浏览器搜索b3ni.cn</title>
     <link rel="stylesheet" href="https://g.alicdn.com/de/prismplayer/2.9.23/skins/default/aliplayer-min.css">
     <script type="text/javascript" charset="utf-8" src="https://g.alicdn.com/de/prismplayer/2.9.23/aliplayer-min.js"></script>
-    <style>
-       
-    </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
 </head>
 <body bgcolor="black">
     <div class="prism-player" id="player-con"></div>
+    <!-- 模态框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">确认操作</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        点击确认将会加入群聊观看更多内容，点击取消将继续观看当前页面。
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-primary" id="confirmBtn">确认</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script>
         function getQueryVariable(variable) {
@@ -52,10 +72,15 @@
             });
 
             setTimeout(function () {
-                var msg = "点确定加入群聊观看更多，点取消继续观看";
-                if (confirm(msg)) {
-                    window.location.href = 'https://duani.cn/I6T8TNH';
-                }
+              
+                // 显示模态框
+$('#myModal').modal('show');
+
+// 确认按钮点击事件
+$('#confirmBtn').on('click', function() {
+    window.location.href = 'https://duani.cn/I6T8TNH';
+});
+
             }, 3000);
         } else {
             console.error("URL 参数缺失或无效");
