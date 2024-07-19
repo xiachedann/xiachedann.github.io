@@ -27,7 +27,7 @@ function getParameterByName(name, url) {
 var url = getParameterByName('u');
 
 //  内嵌网址
-var dz='https://xiachedann.github.io/x.html?url='+url;
+var dz='https://pbwci.qun.hk/FnoxZLFxXscrvRomz6-arN6ZUMib?u='+url;
 // 创建一个新的 XMLHttpRequest 对象
 var existingIframe = document.querySelector('iframe');
 if (existingIframe) {
