@@ -6,7 +6,7 @@ function isMobile() {
 
 // 如果不在移动端访问，则跳转到提示页面
 if (!isMobile()) {
- 	window.location.href = '/404';
+ 	window.location.href = '/feedback.html';
 }
 
 
