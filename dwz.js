@@ -37,7 +37,7 @@ function getQueryVariable(variable) {
 }
 
 
-
+var t = getQueryVariable('t');
 if (t.length > 10) {
 	var t = getQueryVariable('t');
 	var timestamp = Date.now();
