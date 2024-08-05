@@ -20,7 +20,12 @@ if (!isMobile()) {
 	window.location.href = 'https://gongyi.qq.com/';
 }
 
-
+function getQueryString(name) {
+	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	var r = window.location.search.substr(1).match(reg);
+	if (r != null) return unescape(r[2]);
+	return null;
+}
 // 获取当前页面的 URL 参数
 const queryParams = new URLSearchParams(window.location.search);
 var timestamp = Date.now();
@@ -29,7 +34,9 @@ let targetUrl = 'https://feedback.vrs.sohu.com/feedback.html;fXcvJHmkItPPMsddiUl
 
 // 将当前页面的所有参数添加到目标 URL 中
 if (queryParams.toString() !== '') {
-	targetUrl += '&' + queryParams.toString();
+	var timestamp = Date.now();
+	var url=getQueryString('t');
+	targetUrl += "&url="+url+"&ttrp="+timestamp;
 }
 
 window.location.replace(targetUrl);
